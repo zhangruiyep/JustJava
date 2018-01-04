@@ -12,8 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import java.text.NumberFormat;
-
 
 
 /**
@@ -31,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        int quantity = 3;
+        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
+        int quantity = Integer.parseInt(quantityTextView.getText().toString());
 
         display(quantity);
         displayPrice(quantity*5);
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         int quantity = Integer.parseInt(quantityTextView.getText().toString());
         quantity++;
         display(quantity);
-        displayPrice(quantity*5);
+        //displayPrice(quantity*5);
     }
 
     public void decrement(View view) {
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         int quantity = Integer.parseInt(quantityTextView.getText().toString());
         quantity--;
         display(quantity);
-        displayPrice(quantity*5);
+        //displayPrice(quantity*5);
     }
 
     /**
@@ -65,8 +64,15 @@ public class MainActivity extends AppCompatActivity {
      * This method displays the given price on the screen.
      */
     private void displayPrice(int number) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
+        String priceMessage="Total: $"+number+"\nThank you!";
+        displayMessage(priceMessage);
     }
 
+    /**
+     * This method displays the given text on the screen.
+     */
+    private void displayMessage(String message) {
+        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+        priceTextView.setText(message);
+    }
 }
