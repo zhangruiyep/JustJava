@@ -25,22 +25,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    private int calculatePrice() {
+        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
+        int quantity = Integer.parseInt(quantityTextView.getText().toString());
+        return quantity*5;
+    }
+
     /**
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        int quantity = Integer.parseInt(quantityTextView.getText().toString());
+        int price = calculatePrice();
+        //TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
+        //int quantity = Integer.parseInt(quantityTextView.getText().toString());
 
-        display(quantity);
-        displayPrice(quantity*5);
+        //displayQuantity(quantity);
+        displayPrice(price);
+        displayMessage(createOrderSummary(price));
     }
 
     public void increment(View view) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         int quantity = Integer.parseInt(quantityTextView.getText().toString());
         quantity++;
-        display(quantity);
+        displayQuantity(quantity);
         //displayPrice(quantity*5);
     }
 
@@ -48,14 +56,22 @@ public class MainActivity extends AppCompatActivity {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         int quantity = Integer.parseInt(quantityTextView.getText().toString());
         quantity--;
-        display(quantity);
+        displayQuantity(quantity);
         //displayPrice(quantity*5);
+    }
+
+    private String createOrderSummary(int price) {
+        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
+        int quantity = Integer.parseInt(quantityTextView.getText().toString());
+
+        String sum = "Name: Kaptain Kunal\nQuantity: "+quantity+"\nTotal: $"+price+"\nThank you!";
+        return sum;
     }
 
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void display(int number) {
+    private void displayQuantity(int number) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
