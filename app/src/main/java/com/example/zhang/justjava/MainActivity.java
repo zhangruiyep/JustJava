@@ -7,9 +7,14 @@ package com.example.zhang.justjava;
  * package com.example.android.justjava;
  */
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -35,13 +40,25 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
+        String[] maillist = {"1234@abc.com"};
         int price = calculatePrice();
         //TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         //int quantity = Integer.parseInt(quantityTextView.getText().toString());
 
         //displayQuantity(quantity);
-        displayPrice(price);
-        displayMessage(createOrderSummary(price));
+        //displayPrice(price);
+        CheckBox chkbox = (CheckBox) findViewById(R.id.wripped_cream_checkbox);
+        Log.i("MainActivity", String.valueOf(chkbox.isChecked()));
+
+        CheckBox cchkbox = (CheckBox) findViewById(R.id.chocolate_checkbox);
+        Log.i("MainActivity", String.valueOf(cchkbox.isChecked()));
+
+        EditText nameET = (EditText) findViewById(R.id.name_edit_text);
+        Log.i("MainActivity", nameET.getText().toString());
+
+        displayMessage(createOrderSummary(price, chkbox.isChecked(), cchkbox.isChecked(), nameET.getText().toString()));
+
+        //composeEmail(maillist, "coffee order", createOrderSummary(price, chkbox.isChecked(), cchkbox.isChecked(), nameET.getText().toString()));
     }
 
     public void increment(View view) {
@@ -60,11 +77,14 @@ public class MainActivity extends AppCompatActivity {
         //displayPrice(quantity*5);
     }
 
-    private String createOrderSummary(int price) {
+    private String createOrderSummary(int price, boolean wCream_checked, boolean chocolate_checked, String name) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         int quantity = Integer.parseInt(quantityTextView.getText().toString());
 
-        String sum = "Name: Kaptain Kunal\nQuantity: "+quantity+"\nTotal: $"+price+"\nThank you!";
+        String sum = getString(R.string.order_summary_name)+name+
+                "\nAdd Wripped Cream? "+wCream_checked+
+                "\nAdd Chocolate? "+chocolate_checked+
+                "\nQuantity: "+quantity+"\nTotal: $"+price+"\nThank you!";
         return sum;
     }
 
@@ -90,5 +110,16 @@ public class MainActivity extends AppCompatActivity {
     private void displayMessage(String message) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(message);
+    }
+
+    public void composeEmail(String[] addresses, String subject, String emailbody) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, emailbody);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 }
