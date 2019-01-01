@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Title for the application. [CHAR LIMIT=12] -->
-    <string name="app_name">Just Java</string>
+    <string name="app_name">Sólo Java</string>
 
     <!-- Hint text display in the empty field for the user's name [CHAR LIMIT=20] -->
-    <string name="name">name</string>
+    <string name="name">Nombre</string>
 
     <!-- Hint text display in the empty field for the user's name [CHAR LIMIT=20] -->
-    <string name="toppings">toppings</string>
+    <string name="toppings">Ingredientes</string>
 
     <!-- Hint text display in the empty field for the user's name [CHAR LIMIT=20] -->
-    <string name="whipped_cream">Whipped cream</string>
+    <string name="whipped_cream">Crema batida</string>
 
     <!-- Hint text display in the empty field for the user's name [CHAR LIMIT=20] -->
     <string name="chocolate">Chocolate</string>
 
     <!-- Hint text display in the empty field for the user's name [CHAR LIMIT=20] -->
-    <string name="quantity">Quantity</string>
+    <string name="quantity">Cantidad</string>
 
     <!-- Hint text display in the empty field for the user's name [CHAR LIMIT=5] -->
     <string name="initial_quantity_value">2</string>
 
     <!-- Hint text display in the empty field for the user's name [CHAR LIMIT=20] -->
-    <string name="order">Order</string>
+    <string name="order">Ordenar</string>
 
     <!--
       Name for the order summary. It will be shown in the format of "Name: Amy" where Amy is the
       user's name. [CHAR LIMIT=NONE]
     -->
-    <string name="order_summary_name">Number: <xliff:g id="name" example="Amy">%s</xliff:g></string>
+    <string name="order_summary_name">Nombre: <xliff:g id="name" example="Amy">%s</xliff:g></string>
 
     <!--
       Whipped cream topping for the order summary. It will be shown in the format of
